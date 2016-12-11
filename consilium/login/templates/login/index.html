@@ -61,7 +61,8 @@
           <div class="inner cover">
             <h1 class="cover-heading">Consilium</h1>
             <p class="lead">My voice. My choice.</p>
-            <form action="https://strec.xyz/login" method="post">
+            <form action="{% url 'login:auth' %}" method="post">
+              {% csrf_token %}
               <div class="form-group">
                 <input type="email" class="form-control"
                        name="username" placeholder="ID">

@@ -20,6 +20,8 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 from django.conf.urls import url
 from . import views
 
+app_name = 'login'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^$', views.auth, name='auth'),
 ]

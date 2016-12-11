@@ -18,9 +18,21 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 # login-app view bindings
 from django.shortcuts import render
 from django.conf import settings
+from django.urls import reverse
+from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
 def index(request):
     return render(request, 'login/index.html', {
         'version' : settings.VERSION,
     })
+
+def auth(request):
+    try:
+        username = request.POST['username']
+        password = request.POST['password']
+    except (KeyError):
+        # Be very upset
+        return index(request)
+    else:
+        return index(request)
