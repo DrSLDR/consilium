@@ -1,0 +1,94 @@
+{% load static %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://getbootstrap.com/examples/cover/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Consilium login">
+    <meta name="author" content="vT">
+
+    <title>Consilium Workaround</title>
+
+    <!-- Fonts, yo -->
+    <!-- I'll hardcode if I have to. Don't @ me -->
+    <style>
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-Regular.ttf' %});
+        font-weight: 400;
+      }
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-Italic.ttf' %});
+        font-weight: 400;
+        font-style: italic;
+      }
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-Bold.ttf' %});
+        font-weight: 700;
+      }
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-ExtraBold.ttf' %});
+        font-weight: 800;
+      }
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-Light.ttf' %});
+        font-weight: 300;
+      }
+    </style>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'login/cover.css' %}" rel="stylesheet">
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="inner cover">
+            <h1 class="cover-heading">Consilium</h1>
+            <p class="lead">My voice. My choice.</p>
+            <form action="https://strec.xyz/login" method="post">
+              <div class="form-group">
+                <input type="email" class="form-control"
+                       name="username" placeholder="ID">
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password">
+              </div>
+              <button type="submit" class="btn-lg btn-primary max-width">Log In</button>
+            </form>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>This site uses cookies.<br>
+                If you do not consent to the use of
+                the cookies, you cannot use Consilium.</p>
+              <p>If you don't use Consilium, you make the Deputy Speaker very
+                sad.</p>
+              <p>You don't want to make the Deputy Speaker sad, do you?</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>  
+
+</body>
+</html>

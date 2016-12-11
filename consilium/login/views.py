@@ -14,12 +14,13 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-# chat.urls.py
-# chat-app url bindings
+# login.views.py
+# login-app view bindings
+from django.shortcuts import render
+from django.template import loader
+from django.http import HttpResponse
 
-from django.conf.urls import url
-from . import views
-
-urlpatterns = [
-    url(r'^$', views.index, name='index'),
-]
+# Create your views here.
+def index(request):
+    template = loader.get_template('login/index.html')
+    return HttpResponse(template.render({}, request))
