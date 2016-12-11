@@ -17,7 +17,10 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 # login.views.py
 # login-app view bindings
 from django.shortcuts import render
+from django.conf import settings
 
 # Create your views here.
 def index(request):
-    return render(request, 'login/index.html', {})
+    return render(request, 'login/index.html', {
+        'version' : settings.VERSION,
+    })
