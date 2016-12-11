@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.1"
+   width="1233.8065"
+   height="200"
+   id="svg2">
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     transform="translate(-44.856744,-440.52268)"
+     id="layer1">
+    <g
+       transform="matrix(0,0.17974071,0.17974071,0,-135.58136,324.00289)"
+       id="g3014"
+       style="fill:#000000">
+      <path
+         d="m 1520.3,1560.2 0,388.95 -213.01,-246.27 -106.49,246.27 -103.85,-240.22 -207.809,240.22 0,-388.95 631.159,0"
+         id="path3016"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+      <path
+         d="m 1520.16,1560.2 c 0,-174.25 -141.27,-315.51 -315.54,-315.51 -174.29,0 -315.561,141.26 -315.561,315.51 l -240.793,0 c 0,-307.25 249.078,-556.32 556.354,-556.32 307.26,0 556.36,249.07 556.36,556.32 l -240.82,0"
+         id="path3018"
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none" />
+    </g>
+  </g>
+  <text
+     x="170.35994"
+     y="173.34026"
+     id="text3022"
+     xml:space="preserve"
+     style="font-size:207.46887207px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Montserrat;-inkscape-font-specification:Montserrat Bold"><tspan
+       x="170.35994"
+       y="173.34026"
+       id="tspan3024">ONSILIUM</tspan></text>
+</svg>

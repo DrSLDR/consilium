@@ -59,7 +59,7 @@
         <div class="cover-container">
 
           <div class="inner cover">
-            <h1 class="cover-heading">Consilium</h1>
+            <img src="{% static 'img/consilium_large_v2.png' %}" alt="consilium logotype">
             <p class="lead">My voice. My choice.</p>
             <form action="{% url 'login:auth' %}" method="post">
               {% csrf_token %}
