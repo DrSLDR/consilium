@@ -20,6 +20,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 def index(request):
@@ -32,7 +33,21 @@ def auth(request):
         username = request.POST['username']
         password = request.POST['password']
     except (KeyError):
-        # Be very upset
-        return index(request)
+        # Be very upset and just throw the fool back
+        return render(request, 'login/index.html', {
+            'version' : '-1',
+        })
     else:
-        return index(request)
+        # Attempt authentication
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return render(request, 'login/index.html', {
+                'version' : '1337',
+            })
+        else:
+            # Login failed
+            # TODO: add feedback to user about that
+            return render(request, 'login/index.html', {
+                'version' : '0',
+            })

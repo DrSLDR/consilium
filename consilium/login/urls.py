@@ -23,5 +23,5 @@ from . import views
 app_name = 'login'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    url(r'^$', views.auth, name='auth'),
+    url(r'^auth/$', views.auth, name='auth'),
 ]
