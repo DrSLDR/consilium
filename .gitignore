@@ -4,3 +4,4 @@ lib/
 share/
 *.sqlite3
 __pycache__/
+manage.py
