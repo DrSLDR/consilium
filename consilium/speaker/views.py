@@ -26,7 +26,9 @@ def index(request):
 
     # Authenticated user. Load queue data
     first = Queue.objects.filter(queue_id__exact=1)
+    first = first.order_by('timestamp')
     second = Queue.objects.filter(queue_id__exact=2)
+    second = second.order_by('timestamp')
     return render(request, 'speaker/index.html', {
         'udata' : request.user,
         'first' : first,
