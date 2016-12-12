@@ -2,11 +2,54 @@
 {% load staticfiles %}
 {% load static %}
 {% block morehead %}
-    <meta name="description" content="Consilium speaker's list">
-    <meta name="author" content="vT">
+<meta name="description" content="Consilium speaker's list">
+<meta name="author" content="vT">
 
-    <title>Consilium</title>
+<link rel="stylesheet" href="{% static 'speaker/spec.css' %}">
+<title>Consilium</title>
 {% endblock %}
 {% block content %}
-
+<div class="container">
+  <div class="row logo-head">
+    <img src="{% static 'img/consilium_large_v2.png' %}"
+         alt="consilium logotype"  class="center-block">
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-lg btn-primary max-width" id="speak">
+        Jag vill tala
+      </button>
+    </div>
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-lg btn-danger max-width" id="strike">
+        Stryk mig
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Första Talarlistan</h3>
+        </div>
+        <div class="panel-body">
+          <p>Alf</p>
+          <p>Bengt</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Andra Talarlistan</h3>
+        </div>
+        <div class="panel-body">
+          <p>Steffe</p>
+          <p>Holm</p>
+          <p>Trattström</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

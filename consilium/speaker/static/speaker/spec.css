@@ -1,0 +1,27 @@
+html,
+body {
+  height: 100%;
+  background-color: #00acff;
+  background: -webkit-linear-gradient(#00acff, #27ad72);
+  background: -o-linear-gradient(#00acff, #27ad72);
+  background: -moz-linear-gradient(#00acff, #27ad72);
+  background: linear-gradient(#00acff, #27ad72);
+  font-family: "Open Sans", sans-serif;
+}
+
+.panel-title{
+  font-weight: bold;
+  text-align: center;
+}
+
+.logo-head{
+  margin-bottom: 20px;
+}
+
+.max-width {
+    width: 100%;
+}
+
+.row {
+  margin-bottom: 10px;
+}
