@@ -1,0 +1,76 @@
+{% extends 'html/base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% block morehead %}
+<meta name="description" content="Consilium speaker's list">
+<meta name="author" content="vT">
+
+<link rel="stylesheet" href="{% static 'speaker/spec.css' %}">
+<title>Consilium</title>
+
+<script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'speaker/man.js' %}"></script>
+{% endblock %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <a href="/logoff">
+      <button type="button" class="close"
+              aria-label="Close"><span aria-hidden="true">&times;</span>
+      </button>
+    </a>
+  </div>
+  <div class="row logo-head">
+    <img src="{% static 'img/consilium_large_v2.png' %}"
+         alt="consilium logotype"  class="center-block">
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-lg btn-success max-width" id="next">
+        Nästa Talare
+      </button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-lg btn-warning max-width" id="new-list">
+        Ny Lista
+      </button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-lg btn-primary max-width" id="manual-add">
+        Lägg Till Talare
+      </button>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" class="btn btn-lg btn-danger max-width" id="manual-strike">
+        Stryk Talare
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Första Talarlistan</h3>
+        </div>
+        <div class="panel-body" id="primary-list">
+          {% for speaker in first.all %}
+          <p>{{ speaker.speaker.name }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Andra Talarlistan</h3>
+        </div>
+        <div class="panel-body" id="secondary-list">
+          {% for speaker in second.all %}
+          <p>{{ speaker.speaker.name }}</p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

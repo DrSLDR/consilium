@@ -21,7 +21,9 @@ from .models import Queue, Speaker
 
 # Create your views here.
 def index(request):
-    if not request.user.is_authenticated:
+    if (not request.user.is_authenticated or not
+        request.user.groups.filter(name__in=['Representative',
+                                             'Presidium']).exists()):
         return redirect('/')
 
     # Authenticated user. Load queue data
@@ -29,8 +31,14 @@ def index(request):
     first = first.order_by('timestamp')
     second = Queue.objects.filter(queue_id__exact=2)
     second = second.order_by('timestamp')
-    return render(request, 'speaker/index.html', {
+    datablock = {
         'udata' : request.user,
         'first' : first,
         'second' : second,
-    })
+    }
+
+    # Determine which group the user belongs to and pass accordingly
+    if request.user.groups.filter(name='Presidium').exists():
+        return render(request, 'speaker/index_pres.html', datablock)
+    elif request.user.groups.filter(name='Representative').exists():
+        return render(request, 'speaker/index_rep.html', datablock)
