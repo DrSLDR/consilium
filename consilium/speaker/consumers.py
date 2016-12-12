@@ -44,6 +44,11 @@ def ws_message(message):
         _request_to_speak(message)
     elif message.content['text'] == 'strike':
         _request_to_be_struck(message)
+    else:
+        _send_to_master({
+            'oops': 'command not understood',
+            'original': message.content,
+        })
 
 def _request_to_speak(message):
     uname = message.user.first_name + " " + message.user.last_name
