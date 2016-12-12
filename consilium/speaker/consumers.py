@@ -41,7 +41,9 @@ def ws_message(message):
     if not message.user.is_authenticated:
         return
     if message.content['text'] == 'speak':
-        _request_to_speak(message)    
+        _request_to_speak(message)
+    elif message.content['text'] == 'strike':
+        _request_to_be_struck(message)
 
 def _request_to_speak(message):
     uname = message.user.first_name + " " + message.user.last_name
@@ -51,22 +53,25 @@ def _request_to_speak(message):
     q = listlogic.add_to_queue(speaker, item)
     if q == 0:
         return
-    Group('master').send({
-        'text': json.dumps({
-            'speaker' : uname,
-            'queue' : q,
-            'method' : 'add',
-        }),
+    _send_to_master({
+        'speaker' : uname,
+        'queue' : q,
+        'method' : 'add',
     })
     
-
-@channel_session
-def ws_echo(message):
-    if 'username' not in message.channel_session:
+def _request_to_be_struck(message):
+    uname = message.user.first_name + " " + message.user.last_name
+    item = Item.objects.first()
+    meeting = item.meeting
+    speaker = Speaker.objects.get(user=message.user, meeting=meeting)
+    q = listlogic.strike(speaker, item)
+    if q == 0:
         return
-    Group('chat').send({
-        'text': json.dumps({
-            'message': message.content['text'],
-            'username': message.channel_session['username']
-        }),
+    _send_to_master({
+        'speaker': uname,
+        'queue': q,
+        'method': 'strike',
     })
+
+def _send_to_master(data):
+    Group('master').send({'text': json.dumps(data)})

@@ -42,3 +42,12 @@ def spoken(speaker, item):
     l = Log(speaker=speaker, item=item, timestamp=q.timestamp)
     l.save()
     q.delete()
+
+def strike(speaker, item):
+    try:
+        q = Queue.objects.get(speaker=speaker, item=item)
+    except Queue.DoesNotExist:
+        return 0
+    n = q.queue_id
+    q.delete()
+    return n
