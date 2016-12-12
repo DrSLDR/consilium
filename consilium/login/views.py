@@ -27,7 +27,7 @@ def index(request):
     # Test if the user is authenticated
     if request.user.is_authenticated:
         # Redirect to main site
-        return redirect('/chat')
+        return redirect('/list')
     else:
         # Serve login page
         return render(request, 'login/index.html', {

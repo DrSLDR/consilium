@@ -16,10 +16,11 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 # speaker.views.py
 # speaker-app view bindings
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
 # Create your views here.
-@login_required
 def index(request):
-    return render(request, 'speaker/index.html', {})
+    if not request.user.is_authenticated:
+        return redirect('/')
+    else:
+        return render(request, 'speaker/index.html', {})
