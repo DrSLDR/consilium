@@ -1,0 +1,51 @@
+{% load static %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Fonts, yo -->
+    <!-- I'll hardcode if I have to. Don't @ me -->
+    <style>
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-Regular.ttf' %});
+        font-weight: 400;
+      }
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-Italic.ttf' %});
+        font-weight: 400;
+        font-style: italic;
+      }
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-Bold.ttf' %});
+        font-weight: 700;
+      }
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-ExtraBold.ttf' %});
+        font-weight: 800;
+      }
+      @font-face{
+        font-family: "OpenSans";
+        src: url({% static 'fonts/OpenSans-Light.ttf' %});
+        font-weight: 300;
+      }
+    </style>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    {% block morehead %}
+    {% endblock %}
+  </head>
+  <body>
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>

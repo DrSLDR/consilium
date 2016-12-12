@@ -1,8 +1,16 @@
+# Ignore the virtualenv stuffs
 bin/
 include/
 lib/
 share/
+
+# Ignore Django databases and cache
 *.sqlite3
 __pycache__/
 manage.py
+
+# Ignore minified files (used in production, not dev)
 *.min.*
+
+# Ignore binary images by default
+*.png

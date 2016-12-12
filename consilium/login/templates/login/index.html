@@ -1,57 +1,17 @@
+{% extends 'html/base.html' %}
 {% load static %}
 {% load staticfiles %}
 
-<!DOCTYPE html>
-<!-- saved from url=(0040)https://getbootstrap.com/examples/cover/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+{% block morehead %}
     <meta name="description" content="Consilium login">
     <meta name="author" content="vT">
 
-    <title>Consilium Workaround</title>
-
-    <!-- Fonts, yo -->
-    <!-- I'll hardcode if I have to. Don't @ me -->
-    <style>
-      @font-face{
-        font-family: "OpenSans";
-        src: url({% static 'fonts/OpenSans-Regular.ttf' %});
-        font-weight: 400;
-      }
-      @font-face{
-        font-family: "OpenSans";
-        src: url({% static 'fonts/OpenSans-Italic.ttf' %});
-        font-weight: 400;
-        font-style: italic;
-      }
-      @font-face{
-        font-family: "OpenSans";
-        src: url({% static 'fonts/OpenSans-Bold.ttf' %});
-        font-weight: 700;
-      }
-      @font-face{
-        font-family: "OpenSans";
-        src: url({% static 'fonts/OpenSans-ExtraBold.ttf' %});
-        font-weight: 800;
-      }
-      @font-face{
-        font-family: "OpenSans";
-        src: url({% static 'fonts/OpenSans-Light.ttf' %});
-        font-weight: 300;
-      }
-    </style>
-
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <title>Consilium Login</title>
 
     <!-- Custom styles for this template -->
     <link href="{% static 'login/cover.css' %}" rel="stylesheet">
-
-  <body>
-
+{% endblock %}
+{% block content %}
     <div class="site-wrapper">
 
       <div class="site-wrapper-inner">
@@ -93,6 +53,4 @@
       </div>
 
     </div>  
-
-</body>
-</html>
+{% endblock %}
