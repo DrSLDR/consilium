@@ -25,3 +25,8 @@ body {
 .row {
   margin-bottom: 10px;
 }
+
+.close {
+  margin: 10px 10px;
+  font-size: 30px;
+}
