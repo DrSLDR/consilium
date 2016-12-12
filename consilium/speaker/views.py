@@ -23,4 +23,6 @@ def index(request):
     if not request.user.is_authenticated:
         return redirect('/')
     else:
-        return render(request, 'speaker/index.html', {})
+        return render(request, 'speaker/index.html', {
+            'udata' : request.user,
+        })
