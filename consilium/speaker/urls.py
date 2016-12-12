@@ -14,14 +14,12 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-# login.urls.py
-# login url bindings
+# speaker.urls.py
+# speaker url bindings
 from django.conf.urls import url
 from . import views
 
-app_name = 'login'
+app_name = 'speaker'
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^auth/$', views.auth, name='auth'),
-    url(r'^logoff/$', views.logoff, name='logoff'),
+    url(r'$^', views.index, name='index'),
 ]

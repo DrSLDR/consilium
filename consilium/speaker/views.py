@@ -14,14 +14,12 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-# login.urls.py
-# login url bindings
-from django.conf.urls import url
-from . import views
+# speaker.views.py
+# speaker-app view bindings
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
-app_name = 'login'
-urlpatterns = [
-    url(r'^$', views.index, name='index'),
-    url(r'^auth/$', views.auth, name='auth'),
-    url(r'^logoff/$', views.logoff, name='logoff'),
-]
+# Create your views here.
+@login_required
+def index(request):
+    return render(request, 'speaker/index.html', {})
