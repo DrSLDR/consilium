@@ -19,16 +19,19 @@
         <div class="cover-container">
 
           <div class="inner cover">
-            <img src="{% static 'img/consilium_large_v2.png' %}" alt="consilium logotype">
+            <img src="{% static 'img/consilium_large_v2.png' %}" 
+                 alt="consilium logotype">
             <p class="lead">My voice. My choice.</p>
             <form action="{% url 'login:auth' %}" method="post">
               {% csrf_token %}
-              <div class="form-group">
+              <div class="form-group{% if authfail  %} has-error{% endif %}">
                 <input type="text" class="form-control"
-                       name="username" placeholder="ID">
+                       name="username" 
+                       placeholder="{% if authfail %}No such username/password{% else %}ID{% endif %}">
               </div>
-              <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Password">
+              <div class="form-group{% if authfail  %} has-error{% endif %}">
+                <input type="password" class="form-control" name="password" 
+                       placeholder="{% if authfail %}Please try again{% else %}Password{% endif %}">
               </div>
               <button type="submit" class="btn-lg btn-primary max-width">Log In</button>
             </form>

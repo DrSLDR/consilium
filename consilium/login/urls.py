@@ -24,4 +24,5 @@ app_name = 'login'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^auth/$', views.auth, name='auth'),
+    url(r'^logoff/$', views.logoff, name='logoff'),
 ]
