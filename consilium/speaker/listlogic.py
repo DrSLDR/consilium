@@ -42,6 +42,8 @@ def spoken(speaker, item):
     l = Log(speaker=speaker, item=item, timestamp=q.timestamp)
     l.save()
     q.delete()
+    speaker.count += 1
+    speaker.save()
 
 def strike(speaker, item):
     try:
