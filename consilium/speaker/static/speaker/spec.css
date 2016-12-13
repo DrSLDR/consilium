@@ -32,5 +32,12 @@ body {
 }
 #manual-add-name {
   margin-top: 10px;
-  margin-bottom: -15px;
+}
+
+.kill-bottom {
+    margin-bottom: 0px;
+}
+
+#manual-strike-confirm{
+  margin-top: 10px;
 }

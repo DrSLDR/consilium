@@ -50,6 +50,8 @@ def ws_message(message):
         _order_next(message)
     elif command[:4] == 'new:':
         _manual_add(message)
+    elif command[:5] == 'kill:':
+        _order_struck(message)
     else:
         _send_to_master({
             'oops': 'command not understood',
@@ -115,6 +117,21 @@ def _manual_add(message):
         'queue' : q,
         'method' : 'add',
     })
+
+def _order_struck(message):
+    name = message.content['text'][5:]
+    meeting = Meeting.objects.first()
+    speaker = Speaker.objects.get(name=name, meeting=meeting)
+    item = Item.objects.first()
+    q = listlogic.strike(speaker, item)
+    if q == 0:
+        return
+    _send_to_master({
+        'speaker' : name,
+        'queue' : q,
+        'method' : 'strike',
+    })
+    
 
 def _register_speaker(name, meeting, user=None):
     speaker = Speaker(user=user, name=name, meeting=meeting)

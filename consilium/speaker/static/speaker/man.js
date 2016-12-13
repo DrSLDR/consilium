@@ -2,6 +2,9 @@ $(document).ready(function(){
   // Hide the add-speaker field
   $("#manual-add-name").parent().hide();
 
+  // Hide the strike-speaker confirmation buttons
+  $("#manual-strike-confirm").hide();
+
   // Spawn the socket
   var addr = window.location.host;
   if(window.location.protocol == "http"){
@@ -75,4 +78,54 @@ $(document).ready(function(){
     }
   });
 
+  // Manual strike name-click listener
+  var strike_click_listener = function(target){
+    // Unmark all listed speakers and unbind listeners
+    $("#primary-list").children().removeClass('text-danger').off();
+    $("#secondary-list").children().removeClass('text-danger').off();
+
+    // Mark the target
+    target.addClass('bg-danger');
+
+    // Wake the confirmation buttons
+    $("#manual-strike-confirm").slideDown(250, function(){
+      // Rebrand the manual strike button
+      var orig_text = $("#manual-strike").text();
+      $("#manual-strike").attr("disabled", true).text("Bekräfta Strykning?");
+
+      // Shared tasks between buttons
+      var common_tasks = function(){
+        $("#manual-strike-confirm").slideUp(250, function(){
+          $("#manual-strike").attr("disabled", false).text(orig_text);
+        });
+      }
+
+      // Start listening on the confirm buttons
+      $("#manual-strike-confirm-yes").click(function(){
+        // Run the common tasks
+        common_tasks();
+        // Pass data to WebSocket
+        ws.send('kill:' + target.text());
+      });
+      $("#manual-strike-confirm-no").click(function(){
+        // Unmark the target
+        target.removeClass('bg-danger');
+        // Run the common tasks
+        common_tasks();
+      });
+    });
+  }
+
+  // Manual strike button
+  $("#manual-strike").click(function(){
+    // Mark all listed speakers
+    $("#primary-list").children().addClass('text-danger').click(function(){
+      var target = $(this);
+      strike_click_listener(target);
+    });
+    $("#secondary-list").children().addClass('text-danger').click(function(){
+      var target = $(this);
+      strike_click_listener($(this));
+    });
+  });
 });
