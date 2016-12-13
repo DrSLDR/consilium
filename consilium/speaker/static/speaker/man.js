@@ -1,4 +1,7 @@
 $(document).ready(function(){
+  // Capture item id
+  var iid = $("#meeting-item-id").val();
+
   // Hide the add-speaker field
   $("#manual-add-name").parent().hide();
 
@@ -35,11 +38,14 @@ $(document).ready(function(){
     else if(data.method == 'strike'){
       list.children().filter('p:contains(' + data.speaker +')').remove();
     }
+    else if(data.method == 'end'){
+      location.reload(true);
+    }
   };
 
   // Speak button
   $("#speak").click(function(){
-    ws.send('speak');
+    ws.send('speak::' + iid);
   });
 
   // Strike button
@@ -66,7 +72,7 @@ $(document).ready(function(){
         // Run the common tasks
         common_tasks();
         // Pass data to WebSocket
-        ws.send('strike');
+        ws.send('strike::' + iid);
       });
       $("#strike-confirm-no").click(function(){
         // Run the common tasks
@@ -77,7 +83,7 @@ $(document).ready(function(){
 
   // Next speaker button
   $("#next").click(function(){
-    ws.send('next');
+    ws.send('next::' + iid);
   });
 
   // Function for use by the add-speaker event handlers
@@ -89,7 +95,7 @@ $(document).ready(function(){
       // Hide the input field
       $("#manual-add-name").parent().slideUp(250);
       // Pass to WebSocket
-      ws.send('new:' + data);
+      ws.send('new:' + data + ':' + iid);
     } // If the string is empty, do nothing
   }
 
@@ -141,7 +147,7 @@ $(document).ready(function(){
         // Run the common tasks
         common_tasks();
         // Pass data to WebSocket
-        ws.send('kill:' + target.text());
+        ws.send('kill:' + target.text() + ':' + iid);
       });
       $("#manual-strike-confirm-no").click(function(){
         // Unmark the target
@@ -189,7 +195,7 @@ $(document).ready(function(){
         // Run the common tasks
         common_tasks();
         // Pass data to WebSocket
-        ws.send('end-meeting');
+        ws.send('end-meeting::' + iid);
       });
       $("#end-meeting-confirm-no").click(function(){
         // Run the common tasks
