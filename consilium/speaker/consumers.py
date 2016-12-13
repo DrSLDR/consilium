@@ -40,10 +40,15 @@ def ws_add(message):
 def ws_message(message):
     if not message.user.is_authenticated:
         return
-    if message.content['text'] == 'speak':
+
+    # Determine action
+    command = message.content['text']
+    if command  == 'speak':
         _request_to_speak(message)
-    elif message.content['text'] == 'strike':
+    elif command == 'strike':
         _request_to_be_struck(message)
+    elif command == 'next':
+        _order_next(message)
     else:
         _send_to_master({
             'oops': 'command not understood',
@@ -75,6 +80,21 @@ def _request_to_be_struck(message):
     _send_to_master({
         'speaker': uname,
         'queue': q,
+        'method': 'strike',
+    })
+
+def _order_next(message):
+    item = Item.objects.first()
+    q = listlogic.get_next_speaker(item)
+    if q == 0:
+        return
+    speaker = q.speaker
+    uname = speaker.name
+    n = q.queue_id
+    listlogic.spoken(speaker, item)
+    _send_to_master({
+        'speaker': uname,
+        'queue': n,
         'method': 'strike',
     })
 

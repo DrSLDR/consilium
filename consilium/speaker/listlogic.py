@@ -51,3 +51,20 @@ def strike(speaker, item):
     n = q.queue_id
     q.delete()
     return n
+
+def get_next_speaker(item):
+    q = _get_top_of_queue(item, 1)
+    if q is not None:
+        return q
+    q = _get_top_of_queue(item, 2)
+    if q is not None:
+        return q
+    return 0
+
+def _get_top_of_queue(item, queue):
+    try:
+        q = Queue.objects.filter(item__exact=item).filter(queue_id__exact=queue)
+        q = q.order_by('timestamp').first()
+    except Queue.DoesNotExist:
+        return None
+    return q

@@ -36,4 +36,9 @@ $(document).ready(function(){
   $("#strike").click(function(){
     ws.send('strike');
   });
+
+  // Next speaker button
+  $("#next").click(function(){
+    ws.send('next');
+  });
 });
