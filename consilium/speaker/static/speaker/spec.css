@@ -38,6 +38,6 @@ body {
     margin-bottom: 0px;
 }
 
-#manual-strike-confirm{
+#manual-strike-confirm, #strike-confirm{
   margin-top: 10px;
 }

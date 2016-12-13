@@ -3,6 +3,7 @@ $(document).ready(function(){
   $("#manual-add-name").parent().hide();
 
   // Hide the strike-speaker confirmation buttons
+  $("#strike-confirm").hide();
   $("#manual-strike-confirm").hide();
 
   // Spawn the socket
@@ -40,7 +41,31 @@ $(document).ready(function(){
 
   // Strike button
   $("#strike").click(function(){
-    ws.send('strike');
+    // Wake the confirmation buttons
+    $("#strike-confirm").slideDown(250, function(){
+      // Rebrand the strike button
+      var orig_text = $("#strike").text();
+      $("#strike").attr("disabled", true).text("Bekräfta strykning?")
+
+      // Shared tasks between buttons
+      var common_tasks = function(){
+        $("#strike-confirm").slideUp(250, function(){
+          $("#strike").attr("disabled", false).text(orig_text);
+        });
+      }
+
+      // Start listening on the confirm buttons
+      $("#strike-confirm-yes").click(function(){
+        // Run the common tasks
+        common_tasks();
+        // Pass data to WebSocket
+        ws.send('strike');
+      });
+      $("#strike-confirm-no").click(function(){
+        // Run the common tasks
+        common_tasks();
+      });
+    });
   });
 
   // Next speaker button
