@@ -6,6 +6,9 @@ $(document).ready(function(){
   $("#strike-confirm").hide();
   $("#manual-strike-confirm").hide();
 
+  // Hide the end-meeting confirmations
+  $("#end-meeting-confirm").hide();
+
   // Spawn the socket
   var addr = window.location.host;
   if(window.location.protocol == "http"){
@@ -49,6 +52,10 @@ $(document).ready(function(){
 
       // Shared tasks between buttons
       var common_tasks = function(){
+        // Strip listeners
+        $("#strike-confirm-yes").off();
+        $("#strike-confirm-no").off();
+        // Hide and reset
         $("#strike-confirm").slideUp(250, function(){
           $("#strike").attr("disabled", false).text(orig_text);
         });
@@ -120,6 +127,10 @@ $(document).ready(function(){
 
       // Shared tasks between buttons
       var common_tasks = function(){
+        // Strip listeners
+        $("#manual-strike-confirm-yes").off();
+        $("#manual-strike-confirm-no").off();
+        // Hide and reset
         $("#manual-strike-confirm").slideUp(250, function(){
           $("#manual-strike").attr("disabled", false).text(orig_text);
         });
@@ -151,6 +162,39 @@ $(document).ready(function(){
     $("#secondary-list").children().addClass('text-danger').click(function(){
       var target = $(this);
       strike_click_listener($(this));
+    });
+  });
+  
+  // End meeting button
+  $("#end-meeting").click(function(){
+    // Wake the confirmation buttons
+    $("#end-meeting-confirm").slideDown(250, function(){
+      // Rebrand the end-meeting button
+      var orig_text = $("#end-meeting").text();
+      $("#end-meeting").attr("disabled", true).text("Bekräfta Avslut?")
+
+      // Shared tasks between buttons
+      var common_tasks = function(){
+        // Strip listeners
+        $("#end-meeting-confirm-yes").off();
+        $("#end-meeting-confirm-no").off();
+        // Hide and reset
+        $("#end-meeting-confirm").slideUp(250, function(){
+          $("#end-meeting").attr("disabled", false).text(orig_text);
+        });
+      }
+
+      // Start listening on the confirm buttons
+      $("#end-meeting-confirm-yes").click(function(){
+        // Run the common tasks
+        common_tasks();
+        // Pass data to WebSocket
+        ws.send('end-meeting');
+      });
+      $("#end-meeting-confirm-no").click(function(){
+        // Run the common tasks
+        common_tasks();
+      });
     });
   });
 });

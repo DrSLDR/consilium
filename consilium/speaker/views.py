@@ -17,24 +17,29 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 # speaker.views.py
 # speaker-app view bindings
 from django.shortcuts import render, redirect
-from .models import Queue, Speaker
+from .models import Queue, Speaker, Meeting, Item
 
 # Create your views here.
 def index(request):
+    # Initial authentication test
     if (not request.user.is_authenticated or not
         request.user.groups.filter(name__in=['Representative',
                                              'Presidium']).exists()):
         return redirect('/')
 
-    # Authenticated user. Load queue data
+    # Authenticated user. Prepare data block
     first = Queue.objects.filter(queue_id__exact=1)
     first = first.order_by('timestamp')
     second = Queue.objects.filter(queue_id__exact=2)
     second = second.order_by('timestamp')
+    current_meeting = Meeting.objects.get(end_time=None)
+    current_item = Item.objects.filter(meeting__exact=current_meeting).last()
     datablock = {
         'udata' : request.user,
         'first' : first,
         'second' : second,
+        'm_id': current_meeting.id,
+        'i_id': current_item.id,
     }
 
     # Determine which group the user belongs to and pass accordingly
