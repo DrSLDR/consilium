@@ -38,8 +38,7 @@ def index(request):
         'udata' : request.user,
         'first' : first,
         'second' : second,
-        'm_id': current_meeting.id,
-        'i_id': current_item.id,
+        'item': current_item,
     }
 
     # Determine which group the user belongs to and pass accordingly

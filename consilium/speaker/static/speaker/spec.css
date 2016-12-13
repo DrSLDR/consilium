@@ -41,3 +41,10 @@ body {
 #manual-strike-confirm, #strike-confirm, #end-meeting-confirm{
   margin-top: 10px;
 }
+
+#meeting-name, #meeting-item {
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+  margin: 0px 5px;
+}

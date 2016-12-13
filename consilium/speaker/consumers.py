@@ -52,6 +52,8 @@ def ws_message(message):
         _manual_add(message)
     elif command[:5] == 'kill:':
         _order_struck(message)
+    elif command == 'end-meeting':
+        _order_end(message)
     else:
         _send_to_master({
             'oops': 'command not understood',
@@ -131,7 +133,9 @@ def _order_struck(message):
         'queue' : q,
         'method' : 'strike',
     })
-    
+
+def _order_end(message):
+    pass
 
 def _register_speaker(name, meeting, user=None):
     speaker = Speaker(user=user, name=name, meeting=meeting)
