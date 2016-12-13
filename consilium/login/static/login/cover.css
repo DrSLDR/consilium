@@ -173,3 +173,7 @@ body {
 .max-width {
     width: 100%;
 }
+.close{
+  margin: 10px 10px;
+  font-size: 30px;
+}

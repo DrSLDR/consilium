@@ -27,12 +27,24 @@ def index(request):
                                              'Presidium']).exists()):
         return redirect('/')
 
+    # Determine if user is in the Presidium
+    pres = request.user.groups.filter(name='Presidium').exists()
+
+    # Test if there is an active meeting
+    try:
+        current_meeting = Meeting.objects.get(end_time=None)
+    except Meeting.DoesNotExist:
+        # No meeting. Give landing page
+        if pres:
+            return render(request, 'speaker/no_meeting_pres.html', {})
+        else:
+            return render(request, 'speaker/no_meeting_rep.html', {})
+
     # Authenticated user. Prepare data block
     first = Queue.objects.filter(queue_id__exact=1)
     first = first.order_by('timestamp')
     second = Queue.objects.filter(queue_id__exact=2)
     second = second.order_by('timestamp')
-    current_meeting = Meeting.objects.get(end_time=None)
     current_item = Item.objects.filter(meeting__exact=current_meeting).last()
     datablock = {
         'udata' : request.user,
@@ -42,7 +54,7 @@ def index(request):
     }
 
     # Determine which group the user belongs to and pass accordingly
-    if request.user.groups.filter(name='Presidium').exists():
+    if pres:
         return render(request, 'speaker/index_pres.html', datablock)
-    elif request.user.groups.filter(name='Representative').exists():
+    else:
         return render(request, 'speaker/index_rep.html', datablock)
