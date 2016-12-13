@@ -17,10 +17,11 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 # speaker.admin.py
 # speaker-app admin bindings. Allows reading of log and speaker lists from admin interface.
 from django.contrib import admin
-from .models import Speaker, Log, Meeting, Item
+from .models import Speaker, Log, Meeting, Item, Queue
 
 # Register your models here.
 admin.site.register(Speaker)
 admin.site.register(Log)
 admin.site.register(Meeting)
 admin.site.register(Item)
+admin.site.register(Queue)

@@ -51,7 +51,7 @@ class Queue(models.Model):
     timestamp = models.DateTimeField('timestamp', default=timezone.now)
     queue_id = models.IntegerField('queue id', default=1)
 
-    def __str__():
+    def __str__(self):
         return self.speaker.__str__()
 
 class Log(models.Model):
@@ -59,5 +59,5 @@ class Log(models.Model):
     item = models.ForeignKey(Item)
     timestamp = models.DateTimeField('timestamp', default=timezone.now)
 
-    def __str__():
+    def __str__(self):
         return self.speaker.__str__()

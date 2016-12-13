@@ -17,12 +17,18 @@ this program.  If not, see <http://www.gnu.org/licenses/>.
 # speaker.views.py
 # speaker-app view bindings
 from django.shortcuts import render, redirect
+from .models import Queue, Speaker
 
 # Create your views here.
 def index(request):
     if not request.user.is_authenticated:
         return redirect('/')
-    else:
-        return render(request, 'speaker/index.html', {
-            'udata' : request.user,
-        })
+
+    # Authenticated user. Load queue data
+    first = Queue.objects.filter(queue_id__exact=1)
+    second = Queue.objects.filter(queue_id__exact=2)
+    return render(request, 'speaker/index.html', {
+        'udata' : request.user,
+        'first' : first,
+        'second' : second,
+    })

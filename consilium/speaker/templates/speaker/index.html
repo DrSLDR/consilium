@@ -35,9 +35,10 @@
         <div class="panel-heading">
           <h3 class="panel-title">Första Talarlistan</h3>
         </div>
-        <div class="panel-body">
-          <p>Alf</p>
-          <p>Bengt</p>
+        <div class="panel-body" id="primary-list">
+          {% for speaker in first.all %}
+          <p>{{ speaker.speaker.name }}</p>
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -46,15 +47,13 @@
         <div class="panel-heading">
           <h3 class="panel-title">Andra Talarlistan</h3>
         </div>
-        <div class="panel-body">
-          <p>Steffe</p>
-          <p>Holm</p>
-          <p>Trattström</p>
+        <div class="panel-body" id="secondary-list">
+          {% for speaker in second.all %}
+          <p>{{ speaker.speaker.name }}</p>
+          {% endfor %}
         </div>
       </div>
     </div>
   </div>
 </div>
-<input type="hidden" id="speaker-name" 
-       value="{{ udata.first_name }} {{udata.last_name }}">
 {% endblock %}

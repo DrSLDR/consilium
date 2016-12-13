@@ -14,13 +14,14 @@ PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 You should have received a copy of the GNU General Public License along with
 this program.  If not, see <http://www.gnu.org/licenses/>.
 """
-
 # speaker.consumers.py
 # Speaker-app WebSocket data consumer
+import json
 from channels import Group
 from channels.sessions import channel_session
 from channels.auth import channel_session_user_from_http, channel_session_user
-from .models import Speaker, Meeting
+from .models import Speaker, Meeting, Item
+from . import listlogic
 
 @channel_session_user_from_http
 def ws_add(message):
@@ -34,6 +35,30 @@ def ws_add(message):
     except Speaker.DoesNotExist:
         speaker = Speaker(user=message.user, name=uname, meeting=meeting)
         speaker.save()
+
+@channel_session_user
+def ws_message(message):
+    if not message.user.is_authenticated:
+        return
+    if message.content['text'] == 'speak':
+        _request_to_speak(message)    
+
+def _request_to_speak(message):
+    uname = message.user.first_name + " " + message.user.last_name
+    item = Item.objects.first()
+    meeting = item.meeting
+    speaker = Speaker.objects.get(user=message.user, meeting=meeting)
+    q = listlogic.add_to_queue(speaker, item)
+    if q == 0:
+        return
+    Group('master').send({
+        'text': json.dumps({
+            'speaker' : uname,
+            'queue' : q,
+            'method' : 'add',
+        }),
+    })
+    
 
 @channel_session
 def ws_echo(message):
