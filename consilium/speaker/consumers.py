@@ -46,6 +46,8 @@ def ws_message(message):
         _request_to_be_struck(message, data)
     elif command == 'next':
         _order_next(message, data)
+    elif command == 'new-item':
+        _order_new_item(message, data)
     elif command == 'new':
         _manual_add(message, data)
     elif command == 'kill':
@@ -108,6 +110,17 @@ def _order_next(message, data):
         'method': 'strike',
     })
 
+def _order_new_item(message, data):
+    citem = Item.objects.get(id=data['iid'])
+    meeting = citem.meeting
+    nitem = Item(name=data['args'], meeting=meeting)
+    nitem.save()
+    _send_to_master({
+        'speaker' : 'Chronos',
+        'queue' : 0,
+        'method' : 'end',
+    })
+
 def _manual_add(message, data):
     name = data['args']
     item = Item.objects.get(id=data['iid'])
@@ -145,7 +158,7 @@ def _order_end(message, data):
     meeting.end_time = timezone.now()
     meeting.save()
     _send_to_master({
-        'speaker' : 'Mort',
+        'speaker' : 'Thanatos',
         'queue': 0,
         'method': 'end',
     })
@@ -157,7 +170,7 @@ def _order_open(message, data):
     item = Item(name='Start', meeting=meeting)
     item.save()
     _send_to_master({
-        'speaker' : 'Alpha',
+        'speaker' : 'Gaia',
         'queue' : 0,
         'method' : 'end',
     })

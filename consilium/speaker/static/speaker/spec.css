@@ -30,16 +30,13 @@ body {
   margin: 10px 10px;
   font-size: 30px;
 }
-#manual-add-name {
+#manual-add-name, #manual-strike-confirm, #strike-confirm, #end-meeting-confirm,
+#new-list-name {
   margin-top: 10px;
 }
 
 .kill-bottom {
     margin-bottom: 0px;
-}
-
-#manual-strike-confirm, #strike-confirm, #end-meeting-confirm{
-  margin-top: 10px;
 }
 
 #meeting-name, #meeting-item {

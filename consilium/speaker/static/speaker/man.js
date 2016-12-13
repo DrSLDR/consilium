@@ -2,8 +2,9 @@ $(document).ready(function(){
   // Capture item id
   var iid = $("#meeting-item-id").val();
 
-  // Hide the add-speaker field
+  // Hide the add-speaker and new-list fields
   $("#manual-add-name").parent().hide();
+  $("#new-list-name").parent().hide();
 
   // Hide the strike-speaker confirmation buttons
   $("#strike-confirm").hide();
@@ -87,6 +88,36 @@ $(document).ready(function(){
   // Next speaker button
   $("#next").click(function(){
     ws.send('next::' + iid);
+  });
+
+  // Function for use by the new-list event handlers
+  var try_add_item = function(){
+    var data = $("#new-list-name").val();
+    if(data.length > 0){
+      // There was some name supplied. Clear the field
+      $("#new-list-name").val('');
+      // Hide the input field
+      $("#new-list-name").parent().slideUp(250);
+      // Pass to WebSocket
+      ws.send('new-item:' + data + ':' + iid);
+    } // If the string is empty, do nothing
+  }
+
+  // New list button
+  $("#new-list").click(function(){
+    // Show the text field and focus
+    $("#new-list-name").parent().slideDown(250, function(){
+      $("#new-list-name").focus();
+    });
+    // Call the handler, in case the button was re-used
+    try_add_item()
+  });
+
+  // Listener for the enter key on add-speaker text field
+  $("#new-list-name").on("keypress", function(e){
+    if(e.which == 13){
+      try_add_item();
+    }
   });
 
   // Function for use by the add-speaker event handlers
