@@ -30,3 +30,7 @@ body {
   margin: 10px 10px;
   font-size: 30px;
 }
+#manual-add-name {
+  margin-top: 10px;
+  margin-bottom: -15px;
+}

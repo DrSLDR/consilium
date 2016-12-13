@@ -33,8 +33,7 @@ def ws_add(message):
     try:
         speaker = Speaker.objects.get(user=message.user, meeting=meeting)
     except Speaker.DoesNotExist:
-        speaker = Speaker(user=message.user, name=uname, meeting=meeting)
-        speaker.save()
+        _register_speaker(name=uname, meeting=meeting, user=message.user)
 
 @channel_session_user
 def ws_message(message):
@@ -49,6 +48,8 @@ def ws_message(message):
         _request_to_be_struck(message)
     elif command == 'next':
         _order_next(message)
+    elif command[:4] == 'new:':
+        _manual_add(message)
     else:
         _send_to_master({
             'oops': 'command not understood',
@@ -97,6 +98,28 @@ def _order_next(message):
         'queue': n,
         'method': 'strike',
     })
+
+def _manual_add(message):
+    name = message.content['text'][4:]
+    meeting = Meeting.objects.first()
+    try:
+        speaker = Speaker.objects.get(name=name, meeting=meeting)
+    except Speaker.DoesNotExist:
+        speaker = _register_speaker(name, meeting)
+    item = Item.objects.first()
+    q = listlogic.add_to_queue(speaker, item)
+    if q == 0:
+        return
+    _send_to_master({
+        'speaker' : name,
+        'queue' : q,
+        'method' : 'add',
+    })
+
+def _register_speaker(name, meeting, user=None):
+    speaker = Speaker(user=user, name=name, meeting=meeting)
+    speaker.save()
+    return speaker
 
 def _send_to_master(data):
     Group('master').send({'text': json.dumps(data)})
