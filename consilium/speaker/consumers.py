@@ -52,6 +52,8 @@ def ws_message(message):
         _order_struck(message, data)
     elif command == 'end-meeting':
         _order_end(message, data)
+    elif command == 'open':
+        _order_open(message, data)
     else:
         _send_to_master({
             'oops': 'command not understood',
@@ -146,6 +148,18 @@ def _order_end(message, data):
         'speaker' : 'Mort',
         'queue': 0,
         'method': 'end',
+    })
+
+def _order_open(message, data):
+    mname = data['args']
+    meeting = Meeting(name=mname)
+    meeting.save()
+    item = Item(name='Start', meeting=meeting)
+    item.save()
+    _send_to_master({
+        'speaker' : 'Alpha',
+        'queue' : 0,
+        'method' : 'end',
     })
 
 def _parse_message(text):

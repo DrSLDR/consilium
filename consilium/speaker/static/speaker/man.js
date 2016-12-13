@@ -12,6 +12,9 @@ $(document).ready(function(){
   // Hide the end-meeting confirmations
   $("#end-meeting-confirm").hide();
 
+  // Hide start-meeting field
+  $("#start-meeting-name").parent().hide();
+
   // Spawn the socket
   var addr = window.location.host;
   if(window.location.protocol == "http"){
@@ -203,4 +206,31 @@ $(document).ready(function(){
       });
     });
   });
+
+  // Function for use by the add-meeting event handlers
+  var try_add_meeting = function(){
+    var data = $("#start-meeting-name").val();
+    if(data.length > 0){
+      // Pass to WebSocket
+      ws.send('open:' + data + ':');
+    } // If the string is empty, do nothing
+  }
+
+  // Add speaker button
+  $("#start-meeting").click(function(){
+    // Show the text field and focus
+    $("#start-meeting-name").parent().slideDown(250, function(){
+      $("#start-meeting-name").focus();
+    });
+    // Call the handler, in case the button was re-used
+    try_add_meeting()
+  });
+
+  // Listener for the enter key on add-speaker text field
+  $("#start-meeting-name").on("keypress", function(e){
+    if(e.which == 13){
+      try_add_meeting();
+    }
+  });
+
 });

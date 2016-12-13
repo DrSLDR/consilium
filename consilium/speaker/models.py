@@ -23,7 +23,7 @@ from django.utils import timezone
 # Create your models here.
 class Meeting(models.Model):
     name = models.CharField('meeting name', max_length=200)
-    start_time = models.DateTimeField('starting time')
+    start_time = models.DateTimeField('starting time', default=timezone.now)
     end_time = models.DateTimeField('ending time', null=True, blank=True)
 
     def __str__(self):

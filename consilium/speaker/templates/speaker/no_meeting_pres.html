@@ -8,6 +8,8 @@
 
     <title>Consilium - Presidium - Inget Möte Pågår</title>
 
+    <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'speaker/man.js' %}"></script>
     <!-- Custom styles for this template -->
     <link href="{% static 'login/cover.css' %}" rel="stylesheet">
 {% endblock %}
@@ -29,8 +31,23 @@
             <img src="{% static 'img/consilium_large_v2.png' %}" 
                  alt="consilium logotype">
             <h3>Det pågår inget möte just nu</h3>
+            <div class="row">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4">
+                <button type="button" class="btn btn-lg btn-info max-width" 
+                        id="start-meeting">
+                  Öppna Möte
+                </button>
+                <div class="form-group kill-bottom">
+                  <input type="text" name="start-meeting-name" id="start-meeting-name"
+                         placeholder="Riksmötet" class="form-control
+                         max-width">
+                </div>
+              </div>
+              <div class="col-sm-4"></div>
+            </div>
           </div>
-
+          
           <div class="mastfoot">
           </div>
 
