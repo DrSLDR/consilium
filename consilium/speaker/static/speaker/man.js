@@ -18,8 +18,8 @@ $(document).ready(function(){
 
   // Spawn the socket
   var addr = window.location.host;
-  if(window.location.protocol == "http"){
-    addr = 'ws://' + addr;
+  if(window.location.protocol == "https:"){
+    addr = 'wss://' + addr;
   }
   else{
     addr = 'ws://' + addr;
