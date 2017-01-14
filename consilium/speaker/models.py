@@ -46,7 +46,7 @@ class Speaker(models.Model):
         return self.meeting.__str__() + ": " + self.name
 
 class Queue(models.Model):
-    speaker = models.ForeignKey('speaker', Speaker)
+    speaker = models.ForeignKey(Speaker)
     item = models.ForeignKey(Item)
     timestamp = models.DateTimeField('timestamp', default=timezone.now)
     queue_id = models.IntegerField('queue id', default=1)
