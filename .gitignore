@@ -8,8 +8,6 @@ share/
 *.sqlite3
 __pycache__/
 migrations/
-manage.py
-
 
 # Ignore minified files (used in production, not dev)
 *.min.*
