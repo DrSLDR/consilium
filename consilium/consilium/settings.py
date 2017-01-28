@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Master version thing
-VERSION = '0.1.2+71'
+VERSION = '0.1.4+73'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,11 +79,8 @@ WSGI_APPLICATION = 'consilium.wsgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'BACKEND': 'asgiref.inmemory.ChannelLayer',
         'ROUTING': 'consilium.routing.channel_routing',
-        'CONFIG': {
-            'hosts': [('localhost', 6379),],
-        }
     },
 }
 

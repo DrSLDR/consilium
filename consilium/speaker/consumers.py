@@ -20,7 +20,7 @@ import json
 from channels import Group
 from channels.sessions import channel_session
 from channels.auth import channel_session_user_from_http, channel_session_user
-from .models import Speaker, Meeting, Item
+from .models import Speaker, Meeting, Item, Queue
 from . import listlogic
 from django.utils import timezone
 
@@ -115,6 +115,7 @@ def _order_new_item(message, data):
     meeting = citem.meeting
     nitem = Item(name=data['args'], meeting=meeting)
     nitem.save()
+    Queue.objects.all().delete()
     _send_to_master({
         'speaker' : 'Chronos',
         'queue' : 0,
