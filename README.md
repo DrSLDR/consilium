@@ -1,5 +1,5 @@
 # consilium
-_v.0.2.0+82_
+_v.0.2.1+83_
 
 Speaker's list system for Chalmers Student Union Council
 

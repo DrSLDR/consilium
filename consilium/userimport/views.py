@@ -42,8 +42,16 @@ def index(request):
                 # No errors. Continue
                 userlist = data['users']
                 # Load in group references
-                pres = Group.objects.get(name='Presidium')
-                rep = Group.objects.get(name='Representative')
+                try:
+                    pres = Group.objects.get(name='Presidium')
+                except Group.DoesNotExist:
+                    pres = Group(name='Presidium')
+                    pres.save()
+                try:
+                    rep = Group.objects.get(name='Representative')
+                except Group.DoesNotExist:
+                    rep = Group(name='Representative')
+                    rep.save()
                 for user in userlist:
                     try:
                         usermodel = User.objects.get(username=user['username'])
