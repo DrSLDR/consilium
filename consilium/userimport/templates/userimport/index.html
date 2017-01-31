@@ -1,0 +1,41 @@
+{% extends "admin:admin/base.html" %}
+
+{% block title %}
+User import | Consilium administration
+{% endblock %}
+
+{% block branding %}
+<div id="branding">
+  <h1 id="site-name">
+    <a href="/userimport/">Consilium administration</a>
+  </h1>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+{{block.super}}
+  <p>Below, you can paste the CSV-formated user import code.</p>
+  <p>Expected format
+  is <pre>username;first_name;last_name;email;password;type_code </pre> with one
+  user per line.</p>
+  <p>User name, first and last name, and password fields are obligatory. If they
+  are omitted, or a parse error occurs, the <em>entire</em> import is
+  aborted.</p>
+  <p>Accepted type codes are <b>p</b> for <em>Presidium</em> and <b>r</b>
+    for <em>Representative</em>. If type code is omitted, Representative is
+    assumed by default.</p>
+  {% for err in errors %}
+  <p color="red">Parse error: {{ err.message }} on line {{ err.line }}</p>
+  {% endfor %}
+  {% if goodnews %}
+<p><b>Successfully imported {{ goodnews }} user(s)!</b>
+  {% endif %}
+<form action="{% url 'userimport:index' %}" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="">
+</form>
+<p><b>WARNING:</b> This tool is dangerous. It does not validate who a user is
+  before writing new data to it. If you destroy your own account, that's your
+  problem. Double check your usernames.</p>
+{% endblock %}

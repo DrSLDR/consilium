@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 
 # Master version thing
-VERSION = '0.1.4+73'
+VERSION = '0.2.0+82'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'channels',
     'login',
     'speaker',
+    'userimport',
 ]
 
 MIDDLEWARE = [
@@ -63,13 +64,17 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'static'),
         ],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+            ],
+            'loaders': [
+                'apptemplates.Loader',
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader'
             ],
         },
     },
