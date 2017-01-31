@@ -19,9 +19,9 @@
         <div class="cover-container">
 
           <div class="inner cover">
-            <img src="{% static 'img/consilium_large_v2.png' %}" 
+            <img id="logotype" src="{% static 'img/consilium_large_v2.png' %}" 
                  alt="consilium logotype">
-            <p class="lead">My voice. My choice.</p>
+            <p class="lead">Du har ordet</p>
             <form action="{% url 'login:auth' %}" method="post">
               {% csrf_token %}
               <div class="form-group{% if authfail  %} has-error{% endif %}">
@@ -39,14 +39,11 @@
 
           <div class="mastfoot">
             <div class="inner">
-              <p>This site uses cookies.<br>
-                If you do not consent to the use of
-                the cookies, you cannot use Consilium. <br>
-                If you do not use Consilium, you make the Deputy Speaker very
-                sad. <br>
-                You do not want to make the Deputy Speaker sad, do you?</p>
+              <p>Consilium använder kakor.<br>  Om du inte godkänner att kakor
+                lagras på din enhet kan du inte använda Consilium.</p>
               <p>Consilium version:
                 <a href="https://github.com/DrSLDR/consilium"> {{ version }}</a>
+                <br>Consilium &copy; 2016-2017 Jonas A. Hultén
               </p>
             </div>
           </div>

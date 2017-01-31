@@ -28,10 +28,6 @@ html,
 body {
   height: 100%;
   background-color: #00acff;
-  background: -webkit-linear-gradient(#00acff, #27ad72);
-  background: -o-linear-gradient(#00acff, #27ad72);
-  background: -moz-linear-gradient(#00acff, #27ad72);
-  background: linear-gradient(#00acff, #27ad72);
   font-family: "Open Sans", sans-serif;
 }
 .cover-heading {
@@ -132,7 +128,7 @@ body {
 
 .mastfoot {
   color: #999; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
+  color: rgba(255,255,255,.8);
 }
 
 
@@ -176,4 +172,9 @@ body {
 .close{
   margin: 10px 10px;
   font-size: 30px;
+}
+
+#logotype{
+  width:100%;
+  max-width:637px;
 }

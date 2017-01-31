@@ -1,12 +1,17 @@
 html,
 body {
-  height: 100%;
-  background-color: #00acff;
-  background: -webkit-linear-gradient(#00acff, #27ad72);
-  background: -o-linear-gradient(#00acff, #27ad72);
-  background: -moz-linear-gradient(#00acff, #27ad72);
-  background: linear-gradient(#00acff, #27ad72);
   font-family: "Open Sans", sans-serif;
+}
+.rep {
+  background-color: #00acff;
+}
+.pres {
+  background-color: #27ad72;
+}
+
+#logotype{
+  width:100%;
+  max-width:637px;
 }
 
 .panel-title{

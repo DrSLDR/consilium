@@ -11,6 +11,7 @@
 <script type="text/javascript" src="{% static 'js/jquery-3.1.1.js' %}"></script>
 <script type="text/javascript" src="{% static 'speaker/man.js' %}"></script>
 {% endblock %}
+{% block headclass %}rep{% endblock %}
 {% block content %}
 <div class="container">
   <div class="row">
@@ -21,7 +22,7 @@
     </a>
   </div>
   <div class="row logo-head">
-    <img src="{% static 'img/consilium_large_v2.png' %}"
+    <img  id="logotype" src="{% static 'img/consilium_large_v2.png' %}"
          alt="consilium logotype"  class="center-block">
   </div>
   <div class="row">
