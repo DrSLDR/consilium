@@ -22,6 +22,8 @@ from .models import Queue, Speaker, Meeting, Item
 # Create your views here.
 def index(request):
     # Initial authentication test
+    if request.user.is_staff:
+        return redirect('/admin')
     if (not request.user.is_authenticated or not
         request.user.groups.filter(name__in=['Representative',
                                              'Presidium']).exists()):
